@@ -3,9 +3,12 @@
 *~
 repodata
 rpmbuild
+pythonrepo-5-x86_64.cfg
 pythonrepo-6-x86_64.cfg
 pythonrepo-7-x86_64.cfg
 pythonrepo.repo
+pythonrepo/5/SRPMS/*
+pythonrepo/5/x86_64/*
 pythonrepo/6/SRPMS/*
 pythonrepo/6/x86_64/*
 pythonrepo/7/SRPMS/*
