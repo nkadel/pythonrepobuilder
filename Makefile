@@ -27,7 +27,7 @@ epel-install:: $(EPELOKGS)
 python-install:: $(PYTHONPKGS)
 
 # Populate pythonrepo with packages that require pythonrepo
-all:: python-install
+all:: epel-install python-install
 
 install:: epel-install python-install
 
@@ -81,7 +81,7 @@ python-install:: FORCE
 	done
 
 # Dependencies
-python26-awscli-srpm:: python26-setuptools
+python26-awscli-srpm:: python26-setuptools-srpm
 
 # Git clone operations, not normally required
 # Targets may change
