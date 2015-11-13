@@ -23,13 +23,22 @@ EPELPKGS+=python-awscli-srpm
 PYTHONPKGS+=python26-setuptools-srpm
 PYTHONPKGS+=python26-awscli-srpm
 
-epel-install:: $(EPELOKGS)
-python-install:: $(PYTHONPKGS)
-
 # Populate pythonrepo with packages that require pythonrepo
+all:: /usr/bin/createrepo
 all:: epel-install python-install
 
 install:: epel-install python-install
+
+epel-install:: $(EPELOKGS)
+
+# Ensure availability of createrepo
+/usr/bin/createrepo:
+
+# Ensure working configs for python
+python-install:: pythonrepo-5-x86_64.cfg
+python-install:: pythonrepo-6-x86_64.cfg
+python-install:: pythonrepo-7-x86_64.cfg
+python-install:: $(PYTHONPKGS)
 
 pythonrepo-6-x86_64.cfg:: pythonrepo-6-x86_64.cfg.in
 	sed "s|@@@REPOBASEDIR@@@|$(REPOBASEDIR)|g" $? > $@
