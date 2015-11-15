@@ -6,15 +6,16 @@ Maintainer:   Nico Kadel-Garcia
 Maintainer Email: nkadel@gmail.com
 
 Usage:
-    make install - build, and install for local access, the
-    full build requirements for RT4. This is the normal bootstrap
-    operation.
+
+    make [ install ] - build, and install for local access, the full build
+    requirements for aws in diferent operating systems This is the
+    default bootstrap operation.
 
     make build - try and build all the components in the local
     environment, without using "mock"
 
     make all - build all comopnents using "mock" and the local
-    RT4 repository, called "rt4repo"
+    PYTHON repository, called "pythonrepo"
 
     make epel - build only the compoenents that can be built
     from EPEL, without additional comopnents from this toolkit.
@@ -44,5 +45,6 @@ Requirements: This toolkit requires the following tools:
      * "sudo" Permissions to clear the mock cache for pythonrepo build
        environments without having to supply passwords. For example:
 
+	 %mock ALL=(ALL)	NOPASSWD: /bin/touch /etc/mock/pythonrepo-5-x86_64.cfg
 	 %mock ALL=(ALL)	NOPASSWD: /bin/touch /etc/mock/pythonrepo-6-x86_64.cfg
 	 %mock ALL=(ALL)	NOPASSWD: /bin/touch /etc/mock/pythonrepo-7-x86_64.cfg
