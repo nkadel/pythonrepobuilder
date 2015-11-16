@@ -1,17 +1,23 @@
+
+%if ( 0%{?rhel} > 0 && 0%{?rhel} < 6 )
+%define __python %{_bindir}/python2.6
+%define setuptool python26-setuptools
+%define name python26-awscli
+%else
+%define setuptool python-setuptools
 %define name python-awscli
-%define realname awscli
-%define version 1.9.5
-%define unmangled_version 1.9.5
-%define unmangled_version 1.9.5
+%endif
+
+%define version 1.9.7
 %define release 0.1%{?dist}
+%define srcname awscli
 
 Summary: Universal Command Line Environment for AWS.
 Name: %{name}
 Version: %{version}
 Release: %{release}
 # Actual download URL
-# Source0: https://pypi.python.org/packages/source/a/awscli/awscli-1.9.5.tar.gz#md5=ad41219c8d33069a23eee13e1739984f
-Source0: %{realname}-%{unmangled_version}.tar.gz
+Source0: https://pypi.python.org/packages/source/a/awscli/awscli-%{version}.tar.gz
 License: Apache License 2.0
 Group: Development/Libraries
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -19,11 +25,10 @@ Prefix: %{_prefix}
 BuildArch: noarch
 Vendor: Amazon Web Services <UNKNOWN>
 Url: http://aws.amazon.com/cli/
-# Requires python 2.6 or greater
-# Deal with python version requirements for RHEL 5 or older
-
-BuildRequires: python >= 2.6
-BuildRequires: python-setuptools
+# Deal with python 2.6 or greater requirements
+BuildRequires: %{__python}
+BuildRequires: %{setuptool}
+Requires: %{__python}
 
 %description
 =======
@@ -76,7 +81,7 @@ also just `download the tarball`_.  Once you have the
 awscli directory structure on your workstation, you can just run::
 
     $ cd <path_to_awscli>
-    $ python setup.py install
+    $ python2.6 setup.py install
 
 If you want to run the ``develop`` branch of the CLI, see the
 "CLI Dev Version" section below.
@@ -396,13 +401,15 @@ for each repository::
 
 
 %prep
-%setup -n %{realname}-%{unmangled_version}
+%setup -q -n %{srcname}-%{version}
 
 %build
-python setup.py build
+%{__python} setup.py build
 
 %install
-python setup.py install --single-version-externally-managed -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
+%{__python} setup.py install --single-version-externally-managed -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
+# Reduce rpm complaints about duplicates
+LANG=C sort -u -o INSTALLED_FILES INSTALLED_FILES
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -413,4 +420,4 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Thu Nov  5 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 1.9.5-0.1
 - Initial SRPM packaging
-
+- Add python26 and python26-setupdtools dependencies for RHEL 5
