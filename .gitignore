@@ -1,8 +1,8 @@
+*.gz
 *.out
 *.rpm
 *~
-repodata
-rpmbuild
+epel-*
 pythonrepo-5-x86_64.cfg
 pythonrepo-6-x86_64.cfg
 pythonrepo-7-x86_64.cfg
@@ -13,5 +13,5 @@ pythonrepo/6/SRPMS/*
 pythonrepo/6/x86_64/*
 pythonrepo/7/SRPMS/*
 pythonrepo/7/x86_64/*
+repodata
 rpmbuild
-epel-*

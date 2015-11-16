@@ -1,7 +1,8 @@
+*.gz
 *.log
 *.rpm
 *[0-9]
 *~
 epel-*
-rpmbuild
 pythonrepo-*
+rpmbuild
