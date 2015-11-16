@@ -25,6 +25,7 @@ PYTHONPKGS+=python-awscli-srpm
 
 # Populate pythonrepo with packages that require pythonrepo
 all:: /usr/bin/createrepo
+all:: tarballs
 all:: epel-install python-install
 
 install:: epel-install python-install
