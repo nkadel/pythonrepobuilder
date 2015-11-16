@@ -15,13 +15,13 @@ REPOBASESUBDIRS+=$(REPOBASEDIR)/pythonrepo/7/SRPMS
 REPOBASESUBDIRS+=$(REPOBASEDIR)/pythonrepo/7/x86_64
 
 # These build with normal mock "epel-*" setups
-EPELPKGS+=python-awscli-srpm
+EPELPKGS+=
 
 # Require customized pythonrepo local repository for dependencies
-# Needed by various packages
-
+# Required for RHEL 5, provided as python-setuptools on other releases
 PYTHONPKGS+=python26-setuptools-srpm
-PYTHONPKGS+=python26-awscli-srpm
+# Builds as "python26-awscli under RHEL 5
+PYTHONPKGS+=python-awscli-srpm
 
 # Populate pythonrepo with packages that require pythonrepo
 all:: /usr/bin/createrepo
@@ -72,8 +72,10 @@ pythonrepo.repo:: FORCE
 
 epel:: $(EPELPKGS)
 
+# Ensure presence, and repositories, for basedirs
 $(REPOBASESUBDIRS)::
 	mkdir -p $@
+	createrepo -q --update $@
 
 epel-install:: $(REPOBASESUBDIRS)
 
@@ -92,8 +94,32 @@ python-install:: FORCE
 # Dependencies
 python26-awscli-srpm:: python26-setuptools-srpm
 
+# Download tarballs as needed from pypi.org
+$(EPELPKGS) $(PYTHONPKGS):: $(TARBALLS)
+$(EPELPKGS) $(PYTHONPKGS):: $(REPOS)
+
+TARBALLS+=python-awscli-srpm/awscli-1.9.7.tar.gz
+TARBALLS+=python26-awscli-srpm/awscli-1.9.7.tar.gz
+TARBALLS+=python26-setuptools-srpm/setuptools-0.7.4.tar.gz
+tarballs:: $(TARBALLS)
+
+# Ensure that local tarballs match or are downloaded from master
+# pypi.python.org repository
+python26-setuptools-srpm/setuptools-0.7.4.tar.gz::
+	wget --quiet --mirror --no-host-directories --cut-dirs=4 --directory-prefix=`dirname $@` \
+		https://pypi.python.org/packages/source/s/setuptools/`basename $@`
+
+python26-awscli-srpm/awscli-1.9.7.tar.gz::
+	wget --quiet --mirror --no-host-directories --cut-dirs=4 --directory-prefix=`dirname $@` \
+		https://pypi.python.org/packages/source/a/awscli/`basename $@`
+
+python-awscli-srpm/awscli-1.9.7.tar.gz::
+	wget --quiet --mirror --no-host-directories --cut-dirs=4 --directory-prefix=`dirname $@` \
+		https://pypi.python.org/packages/source/a/awscli/`basename $@`
+
 # Git clone operations, not normally required
 # Targets may change
+
 
 # Build EPEL compatible softwaer in place
 $(EPELPKGS):: FORCE

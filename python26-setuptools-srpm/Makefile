@@ -1,1 +1,1 @@
-../Makefile.epel.onlyel5
+../Makefile.python.onlyel5
