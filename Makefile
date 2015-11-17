@@ -99,9 +99,8 @@ python26-awscli-srpm:: python26-setuptools-srpm
 $(EPELPKGS) $(PYTHONPKGS):: $(TARBALLS)
 $(EPELPKGS) $(PYTHONPKGS):: $(REPOS)
 
-TARBALLS+=python-awscli-srpm/awscli-1.9.7.tar.gz
-TARBALLS+=python26-awscli-srpm/awscli-1.9.7.tar.gz
 TARBALLS+=python26-setuptools-srpm/setuptools-0.7.4.tar.gz
+TARBALLS+=python-awscli-srpm/awscli-1.9.7.tar.gz
 tarballs:: $(TARBALLS)
 
 # Ensure that local tarballs match or are downloaded from master
@@ -131,7 +130,7 @@ $(PYTHONPKGS):: pythonrepo-6-x86_64.cfg
 $(PYTHONPKGS):: pythonrepo-7-x86_64.cfg
 
 $(PYTHONPKGS):: FORCE
-	(cd $@ && $(MAKE) $(MLAGS)) || exit 1
+	(cd $@ && $(MAKE) $(MLAGS) all install) || exit 1
 
 # Needed for local compilation, only use for dev environments
 build:: pythonrepo.repo
