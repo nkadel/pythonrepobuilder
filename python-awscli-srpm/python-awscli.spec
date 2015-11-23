@@ -1,4 +1,4 @@
-
+# Manage python 2.6 requirements for RHEL 5
 %if ( 0%{?rhel} > 0 && 0%{?rhel} < 6 )
 %define __python %{_bindir}/python2.6
 %define setuptool python26-setuptools
@@ -8,14 +8,12 @@
 %define name python-awscli
 %endif
 
-%define version 1.9.7
-%define release 0.1%{?dist}
 %define srcname awscli
 
 Summary: Universal Command Line Environment for AWS.
 Name: %{name}
-Version: %{version}
-Release: %{release}
+Version: 1.9.7
+Release: 0.2%{?dist}
 # Actual download URL
 Source0: https://pypi.python.org/packages/source/a/awscli/awscli-%{version}.tar.gz
 License: Apache License 2.0
@@ -407,17 +405,21 @@ for each repository::
 %{__python} setup.py build
 
 %install
-%{__python} setup.py install --single-version-externally-managed -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
-# Reduce rpm complaints about duplicates
-LANG=C sort -u -o INSTALLED_FILES INSTALLED_FILES
+%{__python} setup.py install --single-version-externally-managed -O1 --root=%{buildroot}
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+%{__rm} -rf %{buildroot}
 
-%files -f INSTALLED_FILES
-%defattr(-,root,root)
+%files
+%defattr(-,root,root,-)
+%attr(755,root,root) %{_bindir}/*
+%{python_sitelib}/*
+%doc LICENSE.txt README.rst
 
 %changelog
+* Fri Nov 20 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 1.9.5-0.2
+- Use build and clena steps consistent with EPEL modules
+
 * Thu Nov  5 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 1.9.5-0.1
 - Initial SRPM packaging
 - Add python26 and python26-setupdtools dependencies for RHEL 5
