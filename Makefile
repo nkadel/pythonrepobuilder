@@ -20,8 +20,10 @@ EPELPKGS+=
 # Require customized pythonrepo local repository for dependencies
 # Required for RHEL 5, provided as python-setuptools on other releases
 PYTHONPKGS+=python26-setuptools-srpm
-# Builds as "python26-awscli under RHEL 5
+# Builds as "python26-awscli" under RHEL 5
 PYTHONPKGS+=python-awscli-srpm
+# Lock down "certifi" version for AWS compatibility
+PYTHONPKGS+=python-certifi-srpm
 
 # Populate pythonrepo with packages that require pythonrepo
 all:: /usr/bin/createrepo
