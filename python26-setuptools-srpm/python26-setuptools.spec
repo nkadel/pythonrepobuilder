@@ -3,9 +3,10 @@
 %{!?python2_sitearch: %define python2_sitearch %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")}
 %{!?python2_version:  %define python2_version  %(%{__python2} -c "import sys; sys.stdout.write(sys.version[:3])")}
 
-%define __os_install_post %{__multiple_python_os_install_post}
-%define __python_provides %{__multiple_python_provides}
-%define __python_requires %{__multiple_python_requires}
+# Disabled for RHEL 5 compilation
+#%define __os_install_post %{__multiple_python_os_install_post}
+#%define __python_provides %{__multiple_python_provides}
+#%define __python_requires %{__multiple_python_requires}
 
 %define modn   setuptools
 %define modv   0.7.4
@@ -14,7 +15,7 @@
 Summary:       Easily build and distribute Python packages
 Name:          python26-%{modn}
 Version:       %{modv}
-Release:       0.1%{?dist}%{?pext}
+Release:       0.2%{?dist}%{?pext}
 License:       Python or ZPLv2.0
 Group:         Development/Libraries
 Source0:       https://pypi.python.org/packages/source/s/%{modn}/%{modn}-%{modv}.tar.gz
@@ -78,6 +79,9 @@ ones that have dependencies on other packages.
 
 
 %changelog
+* Thu Nov 05 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 0.7.4-0.2
+- Eliminate "multiple_python"
+
 * Thu Nov 05 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 0.7.4-0.1
 - Roll back release number to avoid upstream conflicts
 
