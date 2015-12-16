@@ -4,17 +4,22 @@
 # Copyright (c) 2015 Nico Kadel-Garcia.
 #
 
-Name:           python-boto3
+%global srcname boto3
+
+Name:           python-%{srcname}
 Version:        1.2.2
-Release:        0
-Url:            https://github.com/boto/boto3
+Release:        0.1%{?dist}
+Url:            https://github.com/boto/%{srcname}
 Summary:        The AWS SDK for Python
 License:        Apache-2.0
 Group:          Development/Languages/Python
-Source:         https://pypi.python.org/packages/source/b/boto3/boto3-%{version}.tar.gz
+Source:         https://pypi.python.org/packages/source/b/%{srcname}/%{srcname}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  python-devel
 #Suggests:       python-futures == 2.2.0
+BuildRequires:  python-devel
+BuildRequires:  python-setuptools
+Requires: python(abi)
 
 %description
 ===============================
@@ -131,7 +136,7 @@ following:
     $ make html
 
 %prep
-%setup -q -n boto3-%{version}
+%setup -q -n %{srcname}-%{version}
 
 %build
 python setup.py build
@@ -145,6 +150,9 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc README.rst LICENSE
-%{python_sitelib}/*
+%{python_sitelib}/%{srcname}
+%{python_sitelib}/%{srcname}-%{version}-*.egg-info
 
 %changelog
+* Wed Dec 16 2016 Nico Kadel-Garcia <nkadel@gmail.com> - 1.2.2-0.1
+- Create initial .spec file with py2pack

@@ -15,7 +15,7 @@ REPOBASESUBDIRS+=$(REPOBASEDIR)/pythonrepo/7/SRPMS
 REPOBASESUBDIRS+=$(REPOBASEDIR)/pythonrepo/7/x86_64
 
 # These build with normal mock "epel-*" setups
-EPELPKGS+=
+EPELPKGS+=python-boto3-srpm
 
 # Require customized pythonrepo local repository for dependencies
 # Required for RHEL 5, provided as python-setuptools on other releases
@@ -103,6 +103,7 @@ $(EPELPKGS) $(PYTHONPKGS):: $(REPOS)
 
 TARBALLS+=python26-setuptools-srpm/setuptools-0.7.4.tar.gz
 TARBALLS+=python-awscli-srpm/awscli-1.9.12.tar.gz
+TARBALLS+=python-boto3-srpm/boto3-1.2.2.tar.gz
 tarballs:: $(TARBALLS)
 
 # Ensure that local tarballs match or are downloaded from master
@@ -111,13 +112,13 @@ python26-setuptools-srpm/setuptools-0.7.4.tar.gz::
 	wget --quiet --mirror --no-host-directories --cut-dirs=4 --directory-prefix=`dirname $@` \
 		https://pypi.python.org/packages/source/s/setuptools/`basename $@`
 
-python26-awscli-srpm/awscli-1.9.12.tar.gz::
-	wget --quiet --mirror --no-host-directories --cut-dirs=4 --directory-prefix=`dirname $@` \
-		https://pypi.python.org/packages/source/a/awscli/`basename $@`
-
 python-awscli-srpm/awscli-1.9.12.tar.gz::
 	wget --quiet --mirror --no-host-directories --cut-dirs=4 --directory-prefix=`dirname $@` \
 		https://pypi.python.org/packages/source/a/awscli/`basename $@`
+
+python-boto3-srpm/boto3-1.2.2.tar.gz::
+	wget --quiet --mirror --no-host-directories --cut-dirs=4 --directory-prefix=`dirname $@` \
+		https://pypi.python.org/packages/source/b/boto3/`basename $@`
 
 # Git clone operations, not normally required
 # Targets may change
