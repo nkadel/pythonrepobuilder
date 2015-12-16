@@ -11,9 +11,9 @@ RSYNCOPTS=-a --no-owner --no-group
 RSYNCSAFEOPTS=$(RSYNCOPTS) --ignore-existing 
 
 # "mock" configurations to build with, activate only as needed
-MOCKS+=pythonrepo-7-x86_64
-MOCKS+=pythonrepo-6-x86_64
 MOCKS+=pythonrepo-5-x86_64
+MOCKS+=pythonrepo-6-x86_64
+MOCKS+=pythonrepo-7-x86_64
 
 # Local yum compatible RPM repository
 REPOBASEDIR="`/bin/pwd | xargs dirname`/pythonrepo"
@@ -82,8 +82,8 @@ install:: $(MOCKS)
 clean::
 	rm -rf $(MOCKS)
 	rm -rf rpmbuild
+	rm -f *.src.rpm
 
 realclean distclean:: clean
-	rm -f *.src.rpm
 
 FORCE:

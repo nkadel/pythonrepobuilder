@@ -102,7 +102,7 @@ $(EPELPKGS) $(PYTHONPKGS):: $(TARBALLS)
 $(EPELPKGS) $(PYTHONPKGS):: $(REPOS)
 
 TARBALLS+=python26-setuptools-srpm/setuptools-0.7.4.tar.gz
-TARBALLS+=python-awscli-srpm/awscli-1.9.7.tar.gz
+TARBALLS+=python-awscli-srpm/awscli-1.9.12.tar.gz
 tarballs:: $(TARBALLS)
 
 # Ensure that local tarballs match or are downloaded from master
@@ -111,11 +111,11 @@ python26-setuptools-srpm/setuptools-0.7.4.tar.gz::
 	wget --quiet --mirror --no-host-directories --cut-dirs=4 --directory-prefix=`dirname $@` \
 		https://pypi.python.org/packages/source/s/setuptools/`basename $@`
 
-python26-awscli-srpm/awscli-1.9.7.tar.gz::
+python26-awscli-srpm/awscli-1.9.12.tar.gz::
 	wget --quiet --mirror --no-host-directories --cut-dirs=4 --directory-prefix=`dirname $@` \
 		https://pypi.python.org/packages/source/a/awscli/`basename $@`
 
-python-awscli-srpm/awscli-1.9.7.tar.gz::
+python-awscli-srpm/awscli-1.9.12.tar.gz::
 	wget --quiet --mirror --no-host-directories --cut-dirs=4 --directory-prefix=`dirname $@` \
 		https://pypi.python.org/packages/source/a/awscli/`basename $@`
 

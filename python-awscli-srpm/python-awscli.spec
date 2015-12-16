@@ -3,6 +3,12 @@
 %define __python %{_bindir}/python2.6
 %define setuptool python26-setuptools
 %define name python26-awscli
+
+# Added from python26-setuptools
+%{!?python_sitelib:  %define python_sitelib  %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
+%{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")}
+%{!?python_version:  %define python_version  %(%{__python} -c "import sys; sys.stdout.write(sys.version[:3])")}
+
 %else
 %define setuptool python-setuptools
 %define name python-awscli
@@ -12,7 +18,7 @@
 
 Name: %{name}
 Summary: Universal Command Line Environment for AWS.
-Version: 1.9.7
+Version: 1.9.12
 Release: 1%{?dist}
 # Actual download URL
 Source0: https://pypi.python.org/packages/source/a/%{srcname}/%{srcname}-%{version}.tar.gz
@@ -72,6 +78,9 @@ The aws-cli package works on Python versions:
 %doc LICENSE.txt README.rst
 
 %changelog
+* Mon Dec 14 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 1.9.12-1
+- Update to 1.9.12
+
 * Sat Dec  5 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 1.9.5-1
 - Udpate to relase "1" for Fedora deployment
 - Re-arrange if statements for RHEL 5
