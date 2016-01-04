@@ -18,7 +18,7 @@
 
 Name: %{name}
 Summary: Universal Command Line Environment for AWS.
-Version: 1.9.12
+Version: 1.9.15
 Release: 1%{?dist}
 # Actual download URL
 Source0: https://pypi.python.org/packages/source/a/%{srcname}/%{srcname}-%{version}.tar.gz
@@ -78,6 +78,9 @@ The aws-cli package works on Python versions:
 %doc LICENSE.txt README.rst
 
 %changelog
+* Mon Jan  4 2016 Nico Kadel-Garcia <nkadel@gmail.com> - 1.9.15-1
+- Update to 1.9.15
+
 * Mon Dec 14 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 1.9.12-1
 - Update to 1.9.12
 
