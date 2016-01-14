@@ -102,7 +102,7 @@ $(EPELPKGS) $(PYTHONPKGS):: $(TARBALLS)
 $(EPELPKGS) $(PYTHONPKGS):: $(REPOS)
 
 TARBALLS+=python26-setuptools-srpm/setuptools-0.7.4.tar.gz
-TARBALLS+=python-awscli-srpm/awscli-1.9.15.tar.gz
+TARBALLS+=python-awscli-srpm/awscli-1.9.12.tar.gz
 TARBALLS+=python-boto3-srpm/boto3-1.2.2.tar.gz
 tarballs:: $(TARBALLS)
 
