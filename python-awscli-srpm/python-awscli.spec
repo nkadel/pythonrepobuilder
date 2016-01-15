@@ -18,8 +18,8 @@
 
 Name: %{name}
 Summary: Universal Command Line Environment for AWS.
-Version: 1.9.15
-Release: 1%{?dist}
+Version: 1.9.20
+Release: 0.1%{?dist}
 # Actual download URL
 Source0: https://pypi.python.org/packages/source/a/%{srcname}/%{srcname}-%{version}.tar.gz
 License: Apache License 2.0
@@ -37,6 +37,15 @@ BuildRequires: python26-setuptools
 BuildRequires: %{__python}
 BuildRequires: python-setuptools
 %endif
+# Not yet tested
+#Requires: python-botocore == 0.3.20
+#Requires: python-colorama >= 0.2.5
+#Requires: python-colorama < 0.3.3
+#Requires: python-docutils >= 0.10
+#Requires: python-rsa >= 3.1.2
+#Requires: python-rsa <= 3.3.0
+# For Python 2.6
+#Requires: python-argparse >= 1.1
 
 %description
 =======
@@ -78,6 +87,9 @@ The aws-cli package works on Python versions:
 %doc LICENSE.txt README.rst
 
 %changelog
+* Fri Jan 15 2016 Nico Kadel-Garcia <nkadel@gmail.com> - 1.9.20-0.1
+- Updte to 1.9.20
+
 * Mon Jan  4 2016 Nico Kadel-Garcia <nkadel@gmail.com> - 1.9.15-1
 - Update to 1.9.15
 
