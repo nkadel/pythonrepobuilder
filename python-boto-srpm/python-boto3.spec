@@ -6,8 +6,9 @@
 
 %global srcname boto3
 
-Name:           python-%{srcname}
-Version:        1.2.2
+#Name:           python-%{srcname}
+Name:           python-boto
+Version:        1.2.3
 Release:        0.1%{?dist}
 Url:            https://github.com/boto/%{srcname}
 Summary:        The AWS SDK for Python
@@ -154,5 +155,8 @@ rm -rf %{buildroot}
 %{python_sitelib}/%{srcname}-%{version}-*.egg-info
 
 %changelog
-* Wed Dec 16 2016 Nico Kadel-Garcia <nkadel@gmail.com> - 1.2.2-0.1
+* Fri Jan 15 2016 Nico Kadel-Garcia <nkadel@gmail.com> - 1.9.20-0.1
+- Update to 1.2.3
+
+* Wed Dec 16 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 1.2.2-0.1
 - Create initial .spec file with py2pack
