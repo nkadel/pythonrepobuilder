@@ -1,7 +1,0 @@
-*.gz
-*.rpm
-*.tar.*
-*[0-9]
-*~
-epel-*
-rpmbuild
