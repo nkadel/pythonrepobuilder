@@ -1,0 +1,22 @@
+From 2d874c8a312cfc07add92fa5673960bfbbfc819d Mon Sep 17 00:00:00 2001
+From: Vadim Rutkovsky <vrutkovs@redhat.com>
+Date: Thu, 21 May 2015 13:03:04 +0200
+Subject: [PATCH] html formatter: no need to set codecs when embedding a video
+
+---
+ behave/formatter/html.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/behave/formatter/html.py b/behave/formatter/html.py
+index 874696e..437ef98 100644
+--- a/behave/formatter/html.py
++++ b/behave/formatter/html.py
+@@ -413,7 +413,7 @@ def _doEmbed(self, span, mime_type, data, caption):
+             embed.tail = u'    '
+             ET.SubElement(embed, 'source',{
+                           'src': u'data:%s;base64,%s' % (mime_type, base64.b64encode(data)),
+-                          'type': '%s; codecs="vp8 vorbis"' % mime_type})
++                          'type': mime_type})
+ 
+         if 'image/' in mime_type:
+             if not caption:
